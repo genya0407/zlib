@@ -4667,15 +4667,25 @@ Init_zlib_ext(void)
 
     id_dictionaries = rb_intern("@dictionaries");
 
-    cZError = rb_define_class_under(mZlib, "Error", rb_eStandardError);
-    cStreamEnd    = rb_define_class_under(mZlib, "StreamEnd", cZError);
-    cNeedDict     = rb_define_class_under(mZlib, "NeedDict", cZError);
-    cDataError    = rb_define_class_under(mZlib, "DataError", cZError);
-    cStreamError  = rb_define_class_under(mZlib, "StreamError", cZError);
-    cMemError     = rb_define_class_under(mZlib, "MemError", cZError);
-    cBufError     = rb_define_class_under(mZlib, "BufError", cZError);
-    cVersionError = rb_define_class_under(mZlib, "VersionError", cZError);
-    cInProgressError = rb_define_class_under(mZlib, "InProgressError", cZError);
+//    cZError = rb_define_class_under(mZlib, "Error", rb_eStandardError);
+//    cStreamEnd    = rb_define_class_under(mZlib, "StreamEnd", cZError);
+//    cNeedDict     = rb_define_class_under(mZlib, "NeedDict", cZError);
+//    cDataError    = rb_define_class_under(mZlib, "DataError", cZError);
+//    cStreamError  = rb_define_class_under(mZlib, "StreamError", cZError);
+//    cMemError     = rb_define_class_under(mZlib, "MemError", cZError);
+//    cBufError     = rb_define_class_under(mZlib, "BufError", cZError);
+//    cVersionError = rb_define_class_under(mZlib, "VersionError", cZError);
+//    cInProgressError = rb_define_class_under(mZlib, "InProgressError", cZError);
+
+    cZError = rb_const_get(mZlib, rb_intern("Error"));
+    cStreamEnd    = rb_const_get(mZlib, rb_intern("StreamEnd"));
+    cNeedDict     = rb_const_get(mZlib, rb_intern("NeedDict"));
+    cDataError    = rb_const_get(mZlib, rb_intern("DataError"));
+    cStreamError  = rb_const_get(mZlib, rb_intern("StreamError"));
+    cMemError     = rb_const_get(mZlib, rb_intern("MemError"));
+    cBufError     = rb_const_get(mZlib, rb_intern("BufError"));
+    cVersionError = rb_const_get(mZlib, rb_intern("VersionError"));
+    cInProgressError = rb_const_get(mZlib, rb_intern("InProgressError"));
 
     rb_define_module_function(mZlib, "zlib_version", rb_zlib_version, 0);
     rb_define_module_function(mZlib, "adler32", rb_zlib_adler32, -1);
