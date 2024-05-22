@@ -134,7 +134,7 @@ if have_zlib
     end
   end
 
-  create_makefile('zlib') {|conf|
+  create_makefile('zlib_ext') {|conf|
     if zsrc
       conf.concat addconf if addconf
     end

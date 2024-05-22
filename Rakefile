@@ -17,6 +17,6 @@ Rake::TestTask.new(:test_internal) do |t|
 end
 
 require 'rake/extensiontask'
-Rake::ExtensionTask.new("zlib")
+Rake::ExtensionTask.new("zlib_ext")
 
 task :default => [:compile, :test]

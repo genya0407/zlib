@@ -308,7 +308,7 @@ static VALUE rb_gzreader_readlines(int, VALUE*, VALUE);
  *   - Zlib::GzipFile::NoFooter
  *
  */
-void Init_zlib(void);
+void Init_zlib_ext(void);
 
 /*--------- Exceptions --------*/
 
@@ -4651,7 +4651,7 @@ zlib_gunzip_run(VALUE arg)
 #endif /* GZIP_SUPPORT */
 
 void
-Init_zlib(void)
+Init_zlib_ext(void)
 {
 #ifdef HAVE_RB_EXT_RACTOR_SAFE
     rb_ext_ractor_safe(true);

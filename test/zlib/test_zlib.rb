@@ -8,7 +8,8 @@ require 'securerandom'
 
 begin
   require 'zlib'
-rescue LoadError
+rescue LoadError => e
+  p e
 end
 
 if defined? Zlib
@@ -1522,6 +1523,10 @@ if defined? Zlib
       #                vvvvvvvv = mtime, but valid UTF-8 string of U+0080
       src = %w[1f8b0800c28000000003cb48cdc9c9070086a6103605000000].pack("H*").force_encoding('UTF-8')
       assert_equal 'hello', Zlib.gunzip(src.freeze)
+    end
+
+    def test_my_func
+      assert_equal Zlib::Deflate.new.my_func, "hoge"
     end
 
     def test_gunzip_no_memory_leak
