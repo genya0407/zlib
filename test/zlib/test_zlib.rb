@@ -9,7 +9,6 @@ require 'securerandom'
 begin
   require 'zlib'
 rescue LoadError => e
-  p e
 end
 
 if defined? Zlib
