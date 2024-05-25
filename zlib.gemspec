@@ -1,7 +1,7 @@
 # coding: utf-8
 # frozen_string_literal: true
 
-source_version = ["", "ext/zlib/"].find do |dir|
+source_version = ["", "ext/zlib_ext/"].find do |dir|
   begin
     break File.open(File.join(__dir__, "#{dir}zlib.c")) {|f|
       f.gets("\n#define RUBY_ZLIB_VERSION ")
