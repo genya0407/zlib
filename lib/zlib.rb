@@ -11,10 +11,6 @@ module Zlib
 
   module_function
 
-  def zlib_version
-    '1.2.12'
-  end
-
   # https://ja.wikipedia.org/wiki/Adler-32
   def adler32(str = nil, adler = 1)
     return 1 unless str

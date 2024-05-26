@@ -4687,7 +4687,7 @@ Init_zlib_ext(void)
     cVersionError = rb_const_get(mZlib, rb_intern("VersionError"));
     cInProgressError = rb_const_get(mZlib, rb_intern("InProgressError"));
 
-//    rb_define_module_function(mZlib, "zlib_version", rb_zlib_version, 0);
+    rb_define_module_function(mZlib, "zlib_version", rb_zlib_version, 0);
 //    rb_define_module_function(mZlib, "adler32", rb_zlib_adler32, -1);
     rb_define_module_function(mZlib, "adler32_combine", rb_zlib_adler32_combine, 3);
     rb_define_module_function(mZlib, "crc32", rb_zlib_crc32, -1);
