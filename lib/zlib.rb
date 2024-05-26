@@ -11,16 +11,19 @@ module Zlib
 
   module_function
 
-  # https://ja.wikipedia.org/wiki/Adler-32
-  def adler32(str = nil, adler = 1)
-    return 1 unless str
+  def adler32(str = '', adler = 1)
+    str = str.respond_to?(:read) ? str.read : str
 
     a = adler & 0xFFFF
     b = (adler >> 16) & 0xFFFF
-    str.each_byte do |byte|
-      a = (a + byte) % 65521
-      b = (b + a) % 65521
+    bytesize = str.bytesize
+    i = 0
+    while i < bytesize
+      b += (a += str.getbyte(i))
+      i += 1
     end
+    a %= 65521
+    b %= 65521
     b * 65536 + a
   end
 end
