@@ -55,6 +55,10 @@ module Zlib
     end
     c ^ 0xFFFFFFFF
   end
+
+  def crc_table
+    CRC_TABLE
+  end
 end
 
 require_relative 'zlib_ext'
