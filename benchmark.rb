@@ -31,6 +31,5 @@ def do_benchmark(target_method: nil)
       end
       x.compare!
     end
-    puts "===== finishes #{matrix[:method]} ====="
   end
 end
