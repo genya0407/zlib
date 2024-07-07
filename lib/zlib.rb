@@ -43,8 +43,11 @@ module Zlib
 
   def crc32(str = '', c = 0)
     c = ~c & 0xFFFFFFFF
-    str.each_byte do |byte|
-      c = CRC_TABLE[(c ^ byte) & 0xFF] ^ (c >> 8)
+    n = str.size
+    i = 0
+    while i < n
+      c = CRC_TABLE[(c ^ str.getbyte(i)) & 0xFF] ^ (c >> 8)
+      i += 1
     end
     c ^ 0xFFFFFFFF
   end
