@@ -42,8 +42,10 @@ module Zlib
   end
 
   def crc32(str = '', c = 0)
+    str = str.respond_to?(:read) ? str.read : str
+
     c = ~c & 0xFFFFFFFF
-    n = str.size
+    n = str.bytesize
     i = 0
     while i < n
       c = CRC_TABLE[(c ^ str.getbyte(i)) & 0xFF] ^ (c >> 8)
@@ -96,7 +98,7 @@ module Zlib
   POLY = 0xedb88320
   CRC_TABLE = Array.new(256) do |i|
     8.times do
-      i = i.odd? ? (0xEDB88320 ^ (i >> 1)) : (i >> 1)
+      i = i.odd? ? (POLY ^ (i >> 1)) : (i >> 1)
     end
     i
   end
