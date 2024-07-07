@@ -4688,11 +4688,13 @@ Init_zlib_ext(void)
     cInProgressError = rb_const_get(mZlib, rb_intern("InProgressError"));
 
     rb_define_module_function(mZlib, "zlib_version", rb_zlib_version, 0);
-//    rb_define_module_function(mZlib, "adler32", rb_zlib_adler32, -1);
-//    rb_define_module_function(mZlib, "adler32_combine", rb_zlib_adler32_combine, 3);
-//    rb_define_module_function(mZlib, "crc32", rb_zlib_crc32, -1);
-//    rb_define_module_function(mZlib, "crc32_combine", rb_zlib_crc32_combine, 3);
-//    rb_define_module_function(mZlib, "crc_table", rb_zlib_crc_table, 0);
+    // _ext prefix begins here
+    rb_define_module_function(mZlib, "adler32_ext", rb_zlib_adler32, -1);
+    rb_define_module_function(mZlib, "adler32_combine_ext", rb_zlib_adler32_combine, 3);
+    rb_define_module_function(mZlib, "crc32_ext", rb_zlib_crc32, -1);
+    rb_define_module_function(mZlib, "crc32_combine_ext", rb_zlib_crc32_combine, 3);
+    rb_define_module_function(mZlib, "crc_table_ext", rb_zlib_crc_table, 0);
+    // _ext prefix ends here
 
     /* The Ruby/zlib version string. */
     rb_define_const(mZlib, "VERSION", rb_str_new2(RUBY_ZLIB_VERSION));
