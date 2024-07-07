@@ -11,10 +11,12 @@ task :test do
 end
 
 desc "benchmark"
-task :benchmark do
+task :benchmark, %i[target_method] do |_tasks, args|
   RubyVM::YJIT.enable
 
-  load './benchmark.rb'
+  require_relative './benchmark'
+
+  do_benchmark(target_method: args[:target_method].to_sym)
 end
 
 Rake::TestTask.new(:test_internal) do |t|
