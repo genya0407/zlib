@@ -12,30 +12,9 @@ end
 
 desc "benchmark"
 task :benchmark do
-  require 'benchmark'
-  require 'securerandom'
-  require_relative 'lib/zlib'
-
   RubyVM::YJIT.enable
 
-  long_string = SecureRandom.bytes(10_000)
-  Benchmark.bmbm do |x|
-    x.report('C-ext') do
-      i = 0
-      while i < 1000
-        Zlib.adler32(long_string)
-        i += 1
-      end
-    end
-
-    x.report('pure Ruby') do
-      i = 0
-      while i < 1000
-        Zlib.adler32_pure(long_string)
-        i += 1
-      end
-    end
-  end
+  load './benchmark.rb'
 end
 
 Rake::TestTask.new(:test_internal) do |t|
