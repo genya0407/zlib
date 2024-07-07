@@ -41,13 +41,6 @@ module Zlib
     b * 65536 + a
   end
 
-  CRC_TABLE = Array.new(256) do |i|
-    8.times do
-      i = i.odd? ? (0xEDB88320 ^ (i >> 1)) : (i >> 1)
-    end
-    i
-  end
-
   def crc32(str = '', c = 0)
     c = ~c & 0xFFFFFFFF
     str.each_byte do |byte|
@@ -56,8 +49,60 @@ module Zlib
     c ^ 0xFFFFFFFF
   end
 
+  def crc32_combine(crc1, crc2, len2)
+    multmodp(x2nmodp(len2, 3), crc1) ^ (crc2 & 0xffffffff)
+  end
+
+  def multmodp(a, b)
+    m = 1 << 31
+    p = 0
+
+    while true do
+      if a & m != 0
+        p ^= b
+        break if a & (m - 1) == 0
+      end
+      m >>= 1
+      b = if b & 1 != 0
+            (b >> 1) ^ POLY
+          else
+            b >> 1
+          end
+    end
+
+    p
+  end
+
+  def x2nmodp(n, k)
+    p = 1 << 31
+
+    while n != 0 do
+      p = multmodp(X2N_TABLE[k & 31], p) if n & 1 != 0
+
+      n >>= 1
+      k += 1
+    end
+
+    p
+  end
+
   def crc_table
     CRC_TABLE
+  end
+
+  POLY = 0xedb88320
+  CRC_TABLE = Array.new(256) do |i|
+    8.times do
+      i = i.odd? ? (0xEDB88320 ^ (i >> 1)) : (i >> 1)
+    end
+    i
+  end
+  X2N_TABLE = Array.new(32).tap do |x2n_table|
+    p = 1 << 30 # x^1
+    x2n_table[0] = p
+    (1..31).each do |i|
+      x2n_table[i] = p = multmodp(p, p);
+    end
   end
 end
 

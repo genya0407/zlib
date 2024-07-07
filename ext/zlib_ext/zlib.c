@@ -4691,7 +4691,7 @@ Init_zlib_ext(void)
 //    rb_define_module_function(mZlib, "adler32", rb_zlib_adler32, -1);
 //    rb_define_module_function(mZlib, "adler32_combine", rb_zlib_adler32_combine, 3);
 //    rb_define_module_function(mZlib, "crc32", rb_zlib_crc32, -1);
-    rb_define_module_function(mZlib, "crc32_combine", rb_zlib_crc32_combine, 3);
+//    rb_define_module_function(mZlib, "crc32_combine", rb_zlib_crc32_combine, 3);
 //    rb_define_module_function(mZlib, "crc_table", rb_zlib_crc_table, 0);
 
     /* The Ruby/zlib version string. */
